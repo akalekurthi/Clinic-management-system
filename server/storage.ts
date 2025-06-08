@@ -35,7 +35,7 @@ export interface IStorage {
   // Dashboard stats
   getDashboardStats(role: string): Promise<any>;
   
-  sessionStore: session.SessionStore;
+  sessionStore: any;
 }
 
 export class MemStorage implements IStorage {
@@ -46,7 +46,7 @@ export class MemStorage implements IStorage {
   private labTests: Map<number, LabTest>;
   private tokenQueue: Map<number, TokenQueue>;
   private currentId: number;
-  public sessionStore: session.SessionStore;
+  public sessionStore: any;
 
   constructor() {
     this.users = new Map();
@@ -102,6 +102,7 @@ export class MemStorage implements IStorage {
     const user: User = { 
       ...insertUser, 
       id,
+      phone: insertUser.phone || null,
       createdAt: new Date()
     };
     this.users.set(id, user);
@@ -121,6 +122,8 @@ export class MemStorage implements IStorage {
     const doctor: Doctor = { 
       ...insertDoctor, 
       id,
+      licenseNumber: insertDoctor.licenseNumber || null,
+      experience: insertDoctor.experience || null,
       isActive: true
     };
     this.doctors.set(id, doctor);
