@@ -50,7 +50,8 @@ export function registerRoutes(app: Express): Server {
       
       const appointmentData = insertAppointmentSchema.parse({
         ...req.body,
-        patientId: req.user!.id
+        patientId: req.user!.id,
+        appointmentDate: new Date(req.body.appointmentDate)
       });
       
       const appointment = await storage.createAppointment(appointmentData);

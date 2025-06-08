@@ -29,7 +29,7 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
     priority: "normal"
   });
 
-  const { data: doctors = [] } = useQuery({
+  const { data: doctors = [] } = useQuery<any[]>({
     queryKey: ["/api/doctors"],
     enabled: isOpen,
   });
@@ -117,7 +117,7 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
                 <SelectValue placeholder="Select a doctor" />
               </SelectTrigger>
               <SelectContent>
-                {doctors.map((doctor) => (
+                {(doctors as any[]).map((doctor: any) => (
                   <SelectItem key={doctor.id} value={doctor.id.toString()}>
                     Dr. {doctor.firstName} {doctor.lastName} - {doctor.specialty}
                   </SelectItem>
