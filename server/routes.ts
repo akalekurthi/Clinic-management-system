@@ -46,6 +46,8 @@ export function registerRoutes(app: Express): Server {
     try {
       if (!req.isAuthenticated()) return res.sendStatus(401);
       
+      console.log("Appointment request data:", req.body);
+      
       const appointmentData = insertAppointmentSchema.parse({
         ...req.body,
         patientId: req.user!.id
@@ -54,7 +56,8 @@ export function registerRoutes(app: Express): Server {
       const appointment = await storage.createAppointment(appointmentData);
       res.status(201).json(appointment);
     } catch (error) {
-      res.status(400).json({ message: "Failed to create appointment" });
+      console.error("Appointment creation error:", error);
+      res.status(400).json({ message: "Failed to create appointment", error: error instanceof Error ? error.message : String(error) });
     }
   });
 

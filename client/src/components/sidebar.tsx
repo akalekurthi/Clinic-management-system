@@ -1,6 +1,7 @@
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { useLocation, Link } from "wouter";
 import { 
   Hospital, 
   LayoutDashboard, 
@@ -20,6 +21,7 @@ import {
 
 export default function Sidebar() {
   const { user, logoutMutation } = useAuth();
+  const [location] = useLocation();
 
   if (!user) return null;
 
@@ -27,38 +29,38 @@ export default function Sidebar() {
     switch (user.role) {
       case 'patient':
         return [
-          { icon: LayoutDashboard, label: 'Dashboard', active: true },
-          { icon: Calendar, label: 'Appointments' },
-          { icon: FlaskConical, label: 'Lab Reports' },
-          { icon: FileText, label: 'Prescriptions' },
-          { icon: Upload, label: 'Upload Reports' },
-          { icon: User, label: 'Profile' }
+          { icon: LayoutDashboard, label: 'Dashboard', path: '/' },
+          { icon: Calendar, label: 'Appointments', path: '/appointments' },
+          { icon: FlaskConical, label: 'Lab Reports', path: '/lab-reports' },
+          { icon: FileText, label: 'Prescriptions', path: '/prescriptions' },
+          { icon: Upload, label: 'Upload Reports', path: '/upload' },
+          { icon: User, label: 'Profile', path: '/profile' }
         ];
       case 'doctor':
         return [
-          { icon: LayoutDashboard, label: 'Dashboard', active: true },
-          { icon: Calendar, label: 'Appointments' },
-          { icon: Users, label: 'Patient History' },
-          { icon: FileText, label: 'Prescriptions' },
-          { icon: FlaskConical, label: 'Lab Requests' },
-          { icon: User, label: 'Profile' }
+          { icon: LayoutDashboard, label: 'Dashboard', path: '/' },
+          { icon: Calendar, label: 'Appointments', path: '/appointments' },
+          { icon: Users, label: 'Patient History', path: '/patients' },
+          { icon: FileText, label: 'Prescriptions', path: '/prescriptions' },
+          { icon: FlaskConical, label: 'Lab Requests', path: '/lab-requests' },
+          { icon: User, label: 'Profile', path: '/profile' }
         ];
       case 'admin':
         return [
-          { icon: LayoutDashboard, label: 'Dashboard', active: true },
-          { icon: Stethoscope, label: 'Manage Doctors' },
-          { icon: Calendar, label: 'Appointments' },
-          { icon: Ticket, label: 'Tokens' },
-          { icon: BarChart3, label: 'Reports' },
-          { icon: User, label: 'Profile' }
+          { icon: LayoutDashboard, label: 'Dashboard', path: '/' },
+          { icon: Stethoscope, label: 'Manage Doctors', path: '/doctors' },
+          { icon: Calendar, label: 'Appointments', path: '/appointments' },
+          { icon: Ticket, label: 'Tokens', path: '/tokens' },
+          { icon: BarChart3, label: 'Reports', path: '/reports' },
+          { icon: User, label: 'Profile', path: '/profile' }
         ];
       case 'lab':
         return [
-          { icon: LayoutDashboard, label: 'Dashboard', active: true },
-          { icon: FlaskConical, label: 'Test Requests' },
-          { icon: Upload, label: 'Upload Reports' },
-          { icon: ClipboardList, label: 'Test History' },
-          { icon: User, label: 'Profile' }
+          { icon: LayoutDashboard, label: 'Dashboard', path: '/' },
+          { icon: FlaskConical, label: 'Test Requests', path: '/test-requests' },
+          { icon: Upload, label: 'Upload Reports', path: '/upload' },
+          { icon: ClipboardList, label: 'Test History', path: '/history' },
+          { icon: User, label: 'Profile', path: '/profile' }
         ];
       default:
         return [];
@@ -98,17 +100,20 @@ export default function Sidebar() {
         <ul className="space-y-2">
           {getNavigationItems().map((item, index) => {
             const Icon = item.icon;
+            const isActive = location === item.path;
             return (
               <li key={index}>
-                <Button
-                  variant="ghost"
-                  className={`w-full justify-start text-blue-100 hover:bg-blue-600 hover:text-white ${
-                    item.active ? 'bg-blue-600 text-white' : ''
-                  }`}
-                >
-                  <Icon className="mr-3 h-4 w-4" />
-                  {item.label}
-                </Button>
+                <Link href={item.path}>
+                  <Button
+                    variant="ghost"
+                    className={`w-full justify-start text-blue-100 hover:bg-blue-600 hover:text-white ${
+                      isActive ? 'bg-blue-600 text-white' : ''
+                    }`}
+                  >
+                    <Icon className="mr-3 h-4 w-4" />
+                    {item.label}
+                  </Button>
+                </Link>
               </li>
             );
           })}

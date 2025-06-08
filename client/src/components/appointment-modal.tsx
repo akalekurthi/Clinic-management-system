@@ -49,7 +49,8 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
       });
       
       if (!response.ok) {
-        throw new Error("Failed to create appointment");
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to create appointment");
       }
       
       return response.json();

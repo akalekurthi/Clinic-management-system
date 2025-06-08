@@ -13,6 +13,18 @@ function Router() {
   return (
     <Switch>
       <ProtectedRoute path="/" component={Dashboard} />
+      <ProtectedRoute path="/appointments" component={() => <Dashboard />} />
+      <ProtectedRoute path="/prescriptions" component={() => <Dashboard />} />
+      <ProtectedRoute path="/lab-reports" component={() => <Dashboard />} />
+      <ProtectedRoute path="/upload" component={() => <Dashboard />} />
+      <ProtectedRoute path="/profile" component={() => <Dashboard />} />
+      <ProtectedRoute path="/patients" component={() => <Dashboard />} />
+      <ProtectedRoute path="/lab-requests" component={() => <Dashboard />} />
+      <ProtectedRoute path="/doctors" component={() => <Dashboard />} />
+      <ProtectedRoute path="/tokens" component={() => <Dashboard />} />
+      <ProtectedRoute path="/reports" component={() => <Dashboard />} />
+      <ProtectedRoute path="/test-requests" component={() => <Dashboard />} />
+      <ProtectedRoute path="/history" component={() => <Dashboard />} />
       <Route path="/auth" component={AuthPage} />
       <Route component={NotFound} />
     </Switch>
