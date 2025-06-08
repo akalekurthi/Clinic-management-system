@@ -1,0 +1,111 @@
+
+
+ Full Prompt for Generating a Clinic Management System Website
+I want to build a full-stack Clinic Management System web application with the following modules:
+
+🎯 Purpose:
+A centralized platform to manage patient appointments, doctor consultations, lab test handling, and admin operations.
+
+👥 User Roles:
+Patient
+
+Doctor
+
+Receptionist/Admin
+
+Lab Assistant
+
+📦 Core Features by Role:
+1. Patient Dashboard
+Register/Login
+
+View available doctors and departments
+
+Book appointment (select date/time/specialist)
+
+View token number and consultation time
+
+View/download prescriptions
+
+Upload past reports (optional)
+
+View lab reports (uploaded by lab assistant)
+
+2. Doctor Dashboard
+Login
+
+View daily appointments with token numbers
+
+Access patient history and uploaded reports
+
+Add diagnosis + prescription
+
+Request lab tests
+
+View test reports once uploaded
+
+3. Receptionist/Admin Dashboard
+Login
+
+Add/Edit/Delete doctor profiles and schedules
+
+Approve, reschedule or cancel appointments
+
+Assign token numbers
+
+Upload hospital notices
+
+Dashboard view (daily patients, slots filled, revenue)
+
+4. Lab Assistant Dashboard
+Login
+
+View lab test requests from doctors
+
+Upload lab test report (PDF/Image)
+
+Add remarks or summary
+
+Mark request as completed
+
+See test history
+
+Dashboard view: pending, completed, today's test count
+
+🔧 Tech Stack (you can use this):
+Frontend: React.js + Tailwind CSS / Bootstrap
+
+Backend: Node.js + Express.js / Django
+
+Database: MongoDB or MySQL
+
+Auth: JWT
+
+Optional: Email Notifications (Nodemailer), PDF generation, Role-Based Access
+
+✨ Pages:
+Homepage (overview of the clinic)
+
+About Us
+
+Contact Page
+
+Login/Register Page (with role selector)
+
+Dashboards for each role
+
+📄 Additional Features :
+Dark/Light Mode toggle
+
+Chart-based dashboard analytics for admin
+
+Doctor availability calendar view
+
+Email/SMS notifications on appointment & report upload
+
+Token number-based queue display
+
+Generate:
+
+Role-based protected routes and dashboards
+
