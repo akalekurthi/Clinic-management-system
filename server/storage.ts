@@ -193,6 +193,7 @@ export class MemStorage implements IStorage {
     const prescription: Prescription = { 
       ...insertPrescription, 
       id,
+      instructions: insertPrescription.instructions || null,
       createdAt: new Date()
     };
     this.prescriptions.set(id, prescription);
@@ -222,6 +223,7 @@ export class MemStorage implements IStorage {
     const labTest: LabTest = { 
       ...insertLabTest, 
       id,
+      appointmentId: insertLabTest.appointmentId || null,
       status: 'requested',
       requestedAt: new Date(),
       completedAt: null,
@@ -251,7 +253,7 @@ export class MemStorage implements IStorage {
     tomorrow.setDate(tomorrow.getDate() + 1);
     
     return Array.from(this.tokenQueue.values()).filter(token => {
-      const tokenDate = new Date(token.queueDate);
+      const tokenDate = token.queueDate ? new Date(token.queueDate) : new Date();
       return tokenDate >= today && tokenDate < tomorrow;
     });
   }
@@ -293,7 +295,7 @@ export class MemStorage implements IStorage {
     });
     
     const todayLabTests = Array.from(this.labTests.values()).filter(test => {
-      const testDate = new Date(test.requestedAt);
+      const testDate = test.requestedAt ? new Date(test.requestedAt) : new Date();
       return testDate >= today && testDate < tomorrow;
     });
     
